@@ -27,7 +27,7 @@ requirements:
     - azure-common >=1.1
     - azure-mgmt-core >=1.5.0
 
-tests:
+test:
   imports:
     - azure.mgmt.search
     - azure.mgmt.search.aio
