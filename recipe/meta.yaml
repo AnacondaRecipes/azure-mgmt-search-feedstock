@@ -1,0 +1,51 @@
+{% set name = "azure-mgmt-search" %}
+{% set version = "9.2.0" %}
+
+package:
+  name: {{ name }}
+  version: {{ version }}
+
+source:
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name | replace('-', '_') }}-{{ version }}.tar.gz
+  sha256: a0da0ec332d1f43d0f6acb63b8cfd80085b075e91afcf812f8c769ad9fdcad84
+
+build:
+  number: 0
+  script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+  skip: true  # [py<39]
+
+requirements:
+  host:
+    - setuptools
+    - wheel
+    - python
+    - pip
+  run:
+    - python
+    - isodate >=0.6.1,<1.0.0
+    - typing-extensions >=4.6.0
+    - azure-common >=1.1
+    - azure-mgmt-core >=1.5.0
+
+tests:
+  imports:
+    - azure.mgmt.search
+    - azure.mgmt.search.aio
+  commands:
+    - pip check
+  requires:
+    - pip
+
+about:
+  home: https://github.com/Azure/azure-sdk-for-python
+  summary: Microsoft Azure Search Management Client Library for Python
+  license: MIT
+  license_file: LICENSE
+  license_family: MIT
+  description: Microsoft Azure Search Management Client Library for Python
+  dev_url: https://github.com/Azure/azure-sdk-for-python
+  doc_url: https://github.com/Azure/azure-sdk-for-python
+
+extra:
+  recipe-maintainers:
+    - janjagusch
